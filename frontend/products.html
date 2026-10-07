@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - MiniShop</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="topbar">
+      <div class="brand">MiniShop</div>
+      <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/products">Products</a>
+        <a href="/customers">Customers</a>
+        <a href="/sales">Sales</a>
+        <a href="/invoices">Invoices</a>
+        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+      </div>
+    </nav>
+
+    <main class="page-container">
+      <h2>Product Management</h2>
+
+      <div class="card form-card">
+        <h3>Add / Update Product</h3>
+        <form id="productForm">
+          <input type="hidden" id="productId" />
+          <div class="form-row">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" id="productName" required />
+            </div>
+            <div class="form-group">
+              <label>SKU</label>
+              <input type="text" id="productSku" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Category</label>
+              <input type="text" id="productCategory" placeholder="Electronics" />
+            </div>
+            <div class="form-group">
+              <label>Price</label>
+              <input type="number" id="productPrice" step="0.01" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Cost Price</label>
+              <input type="number" id="productCost" step="0.01" />
+            </div>
+            <div class="form-group">
+              <label>Stock</label>
+              <input type="number" id="productStock" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="productDescription"></textarea>
+          </div>
+          <div class="button-row">
+            <button type="submit" class="btn btn-primary">Save Product</button>
+            <button type="button" id="resetProductForm" class="btn btn-secondary">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Product List</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>SKU</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="/js/products.js"></script>
+  </body>
+</html>

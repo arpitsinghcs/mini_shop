@@ -1,0 +1,94 @@
+CREATE DATABASE IF NOT EXISTS mini_shop;
+USE mini_shop;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(150) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(50) DEFAULT 'admin',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS products (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  sku VARCHAR(100) UNIQUE NOT NULL,
+  category_id INT,
+  price DECIMAL(10,2) NOT NULL,
+  cost_price DECIMAL(10,2) DEFAULT 0,
+  stock INT NOT NULL DEFAULT 0,
+  description TEXT,
+  image_url VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE IF NOT EXISTS customers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  phone VARCHAR(50) NOT NULL,
+  email VARCHAR(150),
+  address TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  order_number VARCHAR(100) UNIQUE NOT NULL,
+  subtotal DECIMAL(10,2) NOT NULL,
+  discount DECIMAL(10,2) DEFAULT 0,
+  tax DECIMAL(10,2) DEFAULT 0,
+  total DECIMAL(10,2) NOT NULL,
+  order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  status VARCHAR(50) DEFAULT 'Paid',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_id INT NOT NULL,
+  product_id INT NOT NULL,
+  quantity INT NOT NULL,
+  unit_price DECIMAL(10,2) NOT NULL,
+  total_price DECIMAL(10,2) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (order_id) REFERENCES orders(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE IF NOT EXISTS payments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_id INT NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  payment_method VARCHAR(50) DEFAULT 'Cash',
+  status VARCHAR(50) DEFAULT 'completed',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (order_id) REFERENCES orders(id)
+);
+
+INSERT INTO categories (name, description) VALUES
+('Electronics', 'Phones, gadgets and accessories'),
+('Office', 'Office and work accessories'),
+('Home', 'Home use items');
+
+INSERT INTO products (name, sku, category_id, price, cost_price, stock, description) VALUES
+('Wireless Mouse', 'WM-001', 2, 499.00, 250.00, 12, 'Comfortable wireless mouse for work and gaming'),
+('Mechanical Keyboard', 'MK-002', 2, 1499.00, 900.00, 8, 'Mechanical keyboard with RGB lighting'),
+('USB Cable', 'USB-009', 3, 199.00, 80.00, 20, 'Fast charging data cable');
+
+INSERT INTO customers (name, phone, email, address) VALUES
+('Rahul Sharma', '9876543210', 'rahul@gmail.com', 'Delhi'),
+('Neha Verma', '9123456789', 'neha@gmail.com', 'Jaipur');
+
+INSERT INTO users (name, email, password, role) VALUES
+('Admin', 'admin@minishop.com', '$2a$10$0rxr9QqB6QxYx4a4mI4d9OBb3jYt5EoK.O.c4Vf6XPYcaQ8Qf1WPE', 'admin');

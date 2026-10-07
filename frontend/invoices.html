@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoices - MiniShop</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="topbar">
+      <div class="brand">MiniShop</div>
+      <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/products">Products</a>
+        <a href="/customers">Customers</a>
+        <a href="/sales">Sales</a>
+        <a href="/invoices">Invoices</a>
+        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+      </div>
+    </nav>
+
+    <main class="page-container">
+      <h2>Invoices</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Invoice</th>
+              <th>Customer</th>
+              <th>Date</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="invoicesTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="/js/invoices.js"></script>
+  </body>
+</html>

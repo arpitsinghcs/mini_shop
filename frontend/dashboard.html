@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MiniShop Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <nav class="topbar">
+      <div class="brand">MiniShop</div>
+      <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/products">Products</a>
+        <a href="/customers">Customers</a>
+        <a href="/sales">Sales</a>
+        <a href="/invoices">Invoices</a>
+        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+      </div>
+    </nav>
+
+    <main class="page-container">
+      <section class="stats-grid">
+        <div class="card stat-card">
+          <span>Total Products</span>
+          <h2 id="totalProducts">0</h2>
+        </div>
+        <div class="card stat-card">
+          <span>Total Customers</span>
+          <h2 id="totalCustomers">0</h2>
+        </div>
+        <div class="card stat-card">
+          <span>Total Orders</span>
+          <h2 id="totalOrders">0</h2>
+        </div>
+        <div class="card stat-card">
+          <span>Total Revenue</span>
+          <h2 id="totalRevenue">₹0</h2>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="card">
+          <h3>Low Stock Products</h3>
+          <div id="lowStockList" class="list-box"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>
